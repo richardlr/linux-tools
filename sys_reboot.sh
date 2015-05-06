@@ -36,6 +36,10 @@ TIME=`date`
 reboot_sys() {
 	NOW_HOUR=${UPT:1:2}
 	if [ $NOW_HOUR -ge $REBOOT_AFTER ] && [ $NOW_HOUR -lt $REBOOT_BEFORE ]; then
+        # 延迟1秒到1小时之间的一个随机时间
+        delay=$(/usr/bin/expr $RANDOM % 3600 )
+        echo "Sys will reboot after $delay seconds."
+        sleep $delay
 		LOG_STR="$LOG_STR, restart system."
 		echo $LOG_STR
 		echo $LOG_STR >> $LOG_FILE
